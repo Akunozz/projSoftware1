@@ -138,7 +138,7 @@ const questions = [
     question: "Qual é a relevância das pinturas rupestres encontradas no Geoparque de Caçapava do Sul?",
     options: ["Demonstra a presença de povos pré-históricos na região", "Ilustra a chegada dos colonizadores europeus", "Representa cenas de batalhas históricas", "Mostra a fauna local na era moderna"],
     answer: "Demonstra a presença de povos pré-históricos na região",
-    image: "/images/20.jpg",
+    image: "/images/p20.jpg",
     reference: "https://www.scientificarticles.com.br/geoconservacao"
   },
   {
@@ -236,12 +236,23 @@ function Quiz() {
 
   const percentageScore = ((score / questions.length) * 100).toFixed(2);
 
+  const getScoreMessage = () => {
+    if (percentageScore < 48) {
+      return "Você pode melhorar! Estude mais as perguntas no botão Saiba mais e tente novamente.";
+    } else if (percentageScore >= 49 && percentageScore < 78) {
+      return "Bom trabalho! Você está quase lá.";
+    } else {
+      return "Excelente! Você tem um ótimo conhecimento sobre o Geoparque de Caçapava do Sul.";
+    }
+  };
+
   return (
     <div className="quiz">
       {showScore ? (
         <div className="score-section">
           <p>Você acertou {score} de {questions.length} perguntas.</p>
           <p>Isso equivale a {percentageScore}% de acertos.</p>
+          <p>{getScoreMessage()}</p>
           <button onClick={handleRestartQuiz}>Reiniciar Quiz</button>
         </div>
       ) : (
